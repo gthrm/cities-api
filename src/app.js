@@ -13,9 +13,16 @@ const rawDistrictsJson = fs.readFileSync(path.join(__dirname, '../etc/districts.
 const districts = JSON.parse(rawDistrictsJson);
 const rawRegionsJson = fs.readFileSync(path.join(__dirname, '../etc/regions.json'));
 const regions = JSON.parse(rawRegionsJson);
-const updateCities = citiesFixed.map((city) => ({...city,
+const updateCities = citiesFixed.map((city) => ({
+  ...city,
   regions: regions.find((region) => region.id === city.region_id),
-  districts: districts.find((district) => district.id === city.district_id)}));
+  districts: districts.find((district) => district.id === city.district_id),
+}));
+const linkCities = citiesFixed.map((city) => ({
+  ...city,
+  regions: `/regions/${city.region_id}`,
+  districts: `/districts/${city.district_id}`,
+}));
 const serverPort = 9785;
 const app = express();
 
@@ -37,6 +44,20 @@ app.get('/fullcities', (req, res) => {
   let newCities = updateCities;
   if (req.query.name && req.query.name.length > 0) {
     newCities = updateCities.filter((item) => item.name.toLowerCase().includes(req.query.name.toLowerCase()));
+  }
+  res.send(newCities || []);
+});
+
+/**
+ * GET linkcities
+ * 127.0.0.1:9785/linkcities?name=москва
+ * PARAMS
+ * name
+ */
+app.get('/linkcities', (req, res) => {
+  let newCities = linkCities;
+  if (req.query.name && req.query.name.length > 0) {
+    newCities = linkCities.filter((item) => item.name.toLowerCase().includes(req.query.name.toLowerCase()));
   }
   res.send(newCities || []);
 });

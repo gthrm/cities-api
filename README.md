@@ -73,6 +73,14 @@ const options = {
 ```
 ```JavaScript
 /**
+ * GET linkcities
+ * 127.0.0.1:9785/linkcities?name=москва
+ * PARAMS
+ * name
+ */
+ ```
+```JavaScript
+/**
  * GET cities
  * 127.0.0.1:9785/cities?name=москва
  * PARAMS
