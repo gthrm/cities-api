@@ -1,129 +1,33 @@
-# Get Started
+# server
 
-1. run
+### Prerequirements:
+place `config.json` in /vote-service/api/etc
 
-```alias
-yarn
-```
+        {
+        "serverPort": "8080",
+        "db": {
+            "username": "username_db",
+            "pass": "pass_bd",
+            "host": "host_db",
+            "port": "port_db",
+            "name": "name_db"
+             }
+        }
 
-to instal dependencies
+### Code update / initial install:
+        docker-compose build
 
-2. run
+### Container start:
+        docker-compose up -d
 
-```alias
-yarn build
-```
+### Container stop:
+        docker-compose down
 
-to building application files
+### Container logs:
+        docker-compose logs
 
-3. run
+### API location:
+        0.0.0.0:3080/api/
 
-```alias
-yarn start
-```
-
-to start application
-
-## Run to Prod
-
-**Update app.js:**
-
-1. Uncomment
-
-```JavaScript
-import https from 'https';
-```
-
-```JavaScript
-https.createServer(options, app).listen(serverPort, function() {
-  console.log(`Express server listening on port ${serverPort}`);
-});
-```
-
-```JavaScript
-const options = {
-  key: fs.readFileSync(path.join(__dirname, './path/to/private.key', 'private.key')),
-  cert: fs.readFileSync(path.join(__dirname, './path/to/certificate.srt', 'certificate.srt')),
-};
-```
-
-2. To comment
-
-```JavaScript
-// import http from 'http';
-```
-
-```JavaScript
-// http.createServer(app).listen(serverPort, function() {
-//   console.log(`Express server listening on port ${serverPort}`);
-// });
-```
-
-3. Create SSL serts in ./path/to/private.key and './path/to/certificate.srt'
-
-
-## API
-```JavaScript
-/**
- * GET fullcities
- * 127.0.0.1:9785/fullcities?name=москва
- * PARAMS
- * name
- */
-```
-```JavaScript
-/**
- * GET linkcities
- * 127.0.0.1:9785/linkcities?name=москва
- * PARAMS
- * name
- */
- ```
-```JavaScript
-/**
- * GET cities
- * 127.0.0.1:9785/cities?name=москва
- * PARAMS
- * name
- */
-```
-```JavaScript
-/**
- * GET cities/:id
- * 127.0.0.1:9785/cities/1
- */
-```
-```JavaScript
- /**
- * GET districts
- * 127.0.0.1:9785/cities?name=Центральный федеральный округ
- * PARAMS
- * name
- */
-```
-```JavaScript
- /**
- * GET districts/:id
- * 127.0.0.1:9785/districts/1
- */
-```
-```JavaScript
- /**
- * GET regions
- * 127.0.0.1:9785/regions?name=Центральный федеральный округ
- * PARAMS
- * name
- */
-```
-```JavaScript
- /**
- * GET regions/:id
- * 127.0.0.1:9785/regions/1
- */
-```
-```JavaScript
- /**
- * GET *
- * 127.0.0.1:9785/*
- */
-```
+### Proxying explanation
+        https --> external nginx (3080) --> http --> internal docker nginx (3080) --> docker container (80) --> node (8080)
