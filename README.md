@@ -63,7 +63,14 @@ const options = {
 
 
 ## API
-
+```JavaScript
+/**
+ * GET fullcities
+ * 127.0.0.1:9785/fullcities?name=москва
+ * PARAMS
+ * name
+ */
+```
 ```JavaScript
 /**
  * GET cities
