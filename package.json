@@ -1,0 +1,28 @@
+{
+  "name": "cities-api",
+  "version": "1.0.0",
+  "description": "cities-api",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./build/app.js",
+    "build": "./node_modules/.bin/babel src --out-dir build",
+    "deploy": "scp -r build etc package.json README.md babel.config.js user@181.225.35.65:/home/cities-api ",
+    "lint": "eslint *.js **/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
