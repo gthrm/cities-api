@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: ./cities-api
+    volumes:
+      - ./cities-api/api:/app/api
+    expose:
+      - 8080
+  nginx:
+    build: ./nginx
+    ports:
+      - 3080:80
+    depends_on:
+      - web

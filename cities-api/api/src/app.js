@@ -23,7 +23,7 @@ const linkCities = citiesFixed.map((city) => ({
   regions: `/regions/${city.region_id}`,
   districts: `/districts/${city.district_id}`,
 }));
-const serverPort = 9785;
+const serverPort = 8080;
 const app = express();
 
 // const options = {
