@@ -1,18 +1,6 @@
 # server
 
 ### Prerequirements:
-place `config.json` in /vote-service/api/etc
-
-        {
-        "serverPort": "8080",
-        "db": {
-            "username": "username_db",
-            "pass": "pass_bd",
-            "host": "host_db",
-            "port": "port_db",
-            "name": "name_db"
-             }
-        }
 
 ### Code update / initial install:
         docker-compose build
