@@ -1,7 +1,5 @@
 # server
 
-### Prerequirements:
-
 ### Code update / initial install:
         docker-compose build
 
