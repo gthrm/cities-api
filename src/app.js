@@ -13,7 +13,9 @@ const rawDistrictsJson = fs.readFileSync(path.join(__dirname, '../etc/districts.
 const districts = JSON.parse(rawDistrictsJson);
 const rawRegionsJson = fs.readFileSync(path.join(__dirname, '../etc/regions.json'));
 const regions = JSON.parse(rawRegionsJson);
-
+const updateCities = citiesFixed.map((city) => ({...city,
+  regions: regions.find((region) => region.id === city.region_id),
+  districts: districts.find((district) => district.id === city.district_id)}));
 const serverPort = 9785;
 const app = express();
 
@@ -24,6 +26,20 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({origin: '*'}));
+
+/**
+ * GET fullcities
+ * 127.0.0.1:9785/fullcities?name=москва
+ * PARAMS
+ * name
+ */
+app.get('/fullcities', (req, res) => {
+  let newCities = updateCities;
+  if (req.query.name && req.query.name.length > 0) {
+    newCities = updateCities.filter((item) => item.name.toLowerCase().includes(req.query.name.toLowerCase()));
+  }
+  res.send(newCities || []);
+});
 
 /**
  * GET cities
@@ -99,7 +115,7 @@ app.get('/regions/:id', (req, res) => {
  * GET *
  * 127.0.0.1:9785/*
  */
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.status(404);
   if (req.accepts('json')) {
     res.send({error: 'Not found'});

@@ -3,7 +3,7 @@
 /lol
 /upload/*
 /build/*
-
+!README.md
 .DS_Store
 .env.local
 .env.development.local
