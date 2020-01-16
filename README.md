@@ -1,34 +1,96 @@
-# Get Started
+<div align="center">
+  <h1>Russian cities API</h1>
+  <br>
+  <i>Public API</i>
+  <br>
+  <p>
+    RESTful interface for fast accesing russian cities, districts and regions
+  </p>
+  <p>
+     <a href=https://cities-api.ml/cities>https://cities-api.ml/cities</a>
+  </p>
+  <p>
+</div>
 
-1. run
+---
+
+## Documentation
+
+Documentation is avaliable in Postman Documenter:  
+
+https://documenter.getpostman.com/view/5482678/SWLmWjBW?version=latest
+
+**If you can't access API through Postman, try to disable Self-signed SSL check in `Settings -> SSL certificate verification`**
+
+---
+
+## Example
+
+Request: 
+
+    curl --location --request GET 'https://cities-api.ml/cities?name=Новгород'
+
+Response:  
+
+    [
+        {
+            "name": "Нижний Новгород",
+            "district_id": 7,
+            "region_id": 38,
+            "coordinates": "56.296504,43.936059",
+            "id": 1337
+        },
+        {
+            "name": "Великий Новгород",
+            "district_id": 3,
+            "region_id": 39,
+            "coordinates": "58.525570,31.274193",
+            "id": 1363
+        }
+    ]
+
+---
+
+### Deploy your own service
+
+1. Install dependencies
 
 ```alias
 yarn
 ```
 
-to instal dependencies
 
-2. run
+2. Build app
 
 ```alias
 yarn build
 ```
 
-to building application files
 
-3. run
+3. Run server
 
 ```alias
 yarn start
 ```
 
-to start application
 
-## Run to Prod
+### SSL changes for production deployment
 
-**Update app.js:**
+**In app.js:**
 
-1. Uncomment
+1. Comment/delete lines below:
+
+```JavaScript
+// import http from 'http';
+```
+
+```JavaScript
+// http.createServer(app).listen(serverPort, function() {
+//   console.log(`Express server listening on port ${serverPort}`);
+// });
+```
+
+2. Uncomment following lines
 
 ```JavaScript
 import https from 'https';
@@ -47,83 +109,7 @@ const options = {
 };
 ```
 
-2. To comment
-
-```JavaScript
-// import http from 'http';
-```
-
-```JavaScript
-// http.createServer(app).listen(serverPort, function() {
-//   console.log(`Express server listening on port ${serverPort}`);
-// });
-```
-
-3. Create SSL serts in ./path/to/private.key and './path/to/certificate.srt'
 
 
-## API
-```JavaScript
-/**
- * GET fullcities
- * 127.0.0.1:9785/fullcities?name=москва
- * PARAMS
- * name
- */
-```
-```JavaScript
-/**
- * GET linkcities
- * 127.0.0.1:9785/linkcities?name=москва
- * PARAMS
- * name
- */
- ```
-```JavaScript
-/**
- * GET cities
- * 127.0.0.1:9785/cities?name=москва
- * PARAMS
- * name
- */
-```
-```JavaScript
-/**
- * GET cities/:id
- * 127.0.0.1:9785/cities/1
- */
-```
-```JavaScript
- /**
- * GET districts
- * 127.0.0.1:9785/cities?name=Центральный федеральный округ
- * PARAMS
- * name
- */
-```
-```JavaScript
- /**
- * GET districts/:id
- * 127.0.0.1:9785/districts/1
- */
-```
-```JavaScript
- /**
- * GET regions
- * 127.0.0.1:9785/regions?name=Центральный федеральный округ
- * PARAMS
- * name
- */
-```
-```JavaScript
- /**
- * GET regions/:id
- * 127.0.0.1:9785/regions/1
- */
-```
-```JavaScript
- /**
- * GET *
- * 127.0.0.1:9785/*
- */
-```
+3. Place your SSL certificates in `./path/to/private.key` and `./path/to/certificate.srt`
+
