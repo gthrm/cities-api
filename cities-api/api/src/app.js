@@ -49,6 +49,15 @@ app.get('/fullcities', (req, res) => {
 });
 
 /**
+ * GET fullcities/:id
+ * 127.0.0.1:9785/cities/1
+ */
+app.get('/fullcities/:id', (req, res) => {
+  const newCities = updateCities.filter((item) => String(item.id) === req.params.id);
+  res.send(newCities || []);
+});
+
+/**
  * GET linkcities
  * 127.0.0.1:9785/linkcities?name=москва
  * PARAMS
