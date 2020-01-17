@@ -23,7 +23,7 @@ const linkCities = citiesFixed.map((city) => ({
   regions: `/regions/${city.region_id}`,
   districts: `/districts/${city.district_id}`,
 }));
-const serverPort = 9785;
+const serverPort = 8080;
 const app = express();
 
 // const options = {
@@ -53,8 +53,8 @@ app.get('/fullcities', (req, res) => {
  * 127.0.0.1:9785/cities/1
  */
 app.get('/fullcities/:id', (req, res) => {
-  const newCities = updateCities.filter((item) => String(item.id) === req.params.id);
-  res.send(newCities || []);
+  const newCities = updateCities.find((item) => String(item.id) === req.params.id);
+  res.send(newCities || {});
 });
 
 /**
@@ -91,8 +91,8 @@ app.get('/cities', (req, res) => {
  * 127.0.0.1:9785/cities/1
  */
 app.get('/cities/:id', (req, res) => {
-  const newCities = citiesFixed.filter((item) => String(item.id) === req.params.id);
-  res.send(newCities || []);
+  const newCities = citiesFixed.find((item) => String(item.id) === req.params.id);
+  res.send(newCities || {});
 });
 
 /**
@@ -114,8 +114,8 @@ app.get('/districts', (req, res) => {
  * 127.0.0.1:9785/districts/1
  */
 app.get('/districts/:id', (req, res) => {
-  const newDistricts = districts.filter((item) => String(item.id) === req.params.id);
-  res.send(newDistricts || []);
+  const newDistricts = districts.find((item) => String(item.id) === req.params.id);
+  res.send(newDistricts || {});
 });
 
 /**
@@ -137,8 +137,8 @@ app.get('/regions', (req, res) => {
  * 127.0.0.1:9785/regions/1
  */
 app.get('/regions/:id', (req, res) => {
-  const newRegions = regions.filter((item) => String(item.id) === req.params.id);
-  res.send(newRegions || []);
+  const newRegions = regions.find((item) => String(item.id) === req.params.id);
+  res.send(newRegions || {});
 });
 
 /**
