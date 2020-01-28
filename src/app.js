@@ -32,7 +32,7 @@ const app = express();
 // };
 
 app.use(bodyParser.json());
-app.use(cors({origin: '*'}));
+app.use(cors({ origin: '*' }));
 
 /**
  * GET fullcities
@@ -146,17 +146,17 @@ app.get('/regions/:id', (req, res) => {
  * 127.0.0.1:9785/*
  */
 app.use('*', (req, res) => {
-  res.status(404);
+  res.status(418);
   if (req.accepts('json')) {
-    res.send({error: 'Not found'});
+    res.send({ error: "I'm a teapot" });
     return;
   }
-  res.send('Not found');
+  res.send("I'm a teapot");
 });
 
 // https.createServer(options, app).listen(serverPort, function () {
 //     console.log(`Express server listening on port ${serverPort}`);
 // });
-http.createServer(app).listen(serverPort, function() {
+http.createServer(app).listen(serverPort, function () {
   console.log(`Express server listening on port ${serverPort}`);
 });
